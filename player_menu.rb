@@ -19,7 +19,7 @@ class PlayerMenu
 
   def display_menu
     puts
-    puts "Welcome"
+    puts "Welcome #{@player.name}!"
     puts "PLEASE SELECT: "
 
     @@menu_options.each_with_index do |option,i|

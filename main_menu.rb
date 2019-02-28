@@ -1,4 +1,4 @@
-
+require 'pry'
 class MainMenu
 
   @@menu_options = [
@@ -6,6 +6,8 @@ class MainMenu
     'Switch Players',
     'Exit Casino'
   ]
+
+  @@players = []
 
   def initialize
     choose_from_menu
@@ -22,7 +24,6 @@ class MainMenu
   end
 
   def choose_from_menu
-    players = []
     display_menu
     choice = gets.chomp.to_i
     case choice 
@@ -33,14 +34,18 @@ class MainMenu
         puts "How much money is the player coming in with?"
         balance = gets.to_i
         player = Player.new(new_player_name, balance)
-        players << player
+        @@players << player
+        # binding.pr
         player_menu = PlayerMenu.new(player)
       when 2
-        p players[0]
+        @@players.each_with_index do |player, i|
+          print "#{i+1}: #{player.name}"
+          puts
+        end
         puts
         puts "select player"
         sel = gets.chomp.to_i
-        player_menu = PlayerMenu.new(players[sel-1])
+        player_menu = PlayerMenu.new(@@players[sel-1])
       when 3
         puts "Goodbye" 
         exit
